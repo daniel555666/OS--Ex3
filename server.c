@@ -15,6 +15,9 @@
 #include <sys/wait.h>
 #include <signal.h>
 
+#include <stdio.h>
+#include <stdlib.h>
+
 #include <pthread.h>
 
 #define PORT "3490" // the port users will be connecting to
@@ -34,7 +37,7 @@ void sigchld_handler(int s)
 void *myThreadFun(int new_fd)
 {
     printf("new client connect %d\n", new_fd);
-    sleep(10);
+    sleep((rand()%15));
     if (send(new_fd, "Hello, world!", 13, 0) == -1)
     {
         perror("send");
